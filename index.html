@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,14 +10,15 @@
 <style>
 body {
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
     background: radial-gradient(circle at top, #1e1e2f, #0f0f1a 70%);
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
     color: white;
-    overflow: hidden;
+    overflow-y: auto; /* allow vertical scroll */
+    -webkit-overflow-scrolling: touch; /* smooth scroll on iPhone */
 }
 
 /* LOCK SCREEN */
@@ -72,6 +73,7 @@ button:hover {
 .container {
     display: none;
     max-width: 750px;
+    width: 90%;
     padding: 50px;
     background: rgba(255,255,255,0.05);
     border-radius: 20px;
@@ -79,6 +81,7 @@ button:hover {
     box-shadow: 0 0 60px rgba(255,255,255,0.08);
     text-align: center;
     animation: fadeIn 1s ease forwards;
+    margin: 40px 0;
 }
 
 @keyframes fadeIn {
@@ -99,6 +102,9 @@ button:hover {
     margin-top: 20px;
     min-height: 200px;
     white-space: pre-wrap;
+    max-height: 400px; /* scrollable area */
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 .final-message {
@@ -185,10 +191,13 @@ function checkPin() {
     if (entered === correctPin) {
         lock.style.display = "none";
         document.getElementById("mainContent").style.display = "block";
+        document.getElementById("text").innerHTML = "";
+        i = 0;
         typeWriter();
     } else {
         lock.classList.add("shake");
         setTimeout(() => lock.classList.remove("shake"), 400);
+        document.getElementById("pinInput").value = "";
     }
 }
 
@@ -205,6 +214,11 @@ function typeWriter() {
 function chooseYou() {
     document.getElementById("finalText").style.opacity = "1";
 }
+
+// Optional: press Enter to unlock
+document.getElementById("pinInput").addEventListener("keypress", function(e){
+    if(e.key === "Enter"){ checkPin(); }
+});
 </script>
 
 </body>
