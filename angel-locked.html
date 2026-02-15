@@ -1,0 +1,194 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Angel 🔒</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #1e1e2f, #0f0f1a 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    overflow: hidden;
+}
+
+/* LOCK SCREEN */
+.lock-screen {
+    text-align: center;
+    background: rgba(255,255,255,0.05);
+    padding: 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 60px rgba(255,255,255,0.08);
+    transition: 0.5s ease;
+}
+
+.lock-screen.shake {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
+}
+
+input {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 25px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(45deg, #ff4e88, #ff8c42);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* MAIN CONTENT */
+.container {
+    display: none;
+    max-width: 750px;
+    padding: 50px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 60px rgba(255,255,255,0.08);
+    text-align: center;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 45px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 25px rgba(255,150,200,1);
+}
+
+.message {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-top: 20px;
+    min-height: 200px;
+    white-space: pre-wrap;
+}
+
+.final-message {
+    margin-top: 20px;
+    font-size: 20px;
+    opacity: 0;
+    transition: 1s ease;
+}
+</style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div class="lock-screen" id="lockScreen">
+    <h2>Enter The PIN 🔒</h2>
+    <p>This is just for you, Angel</p>
+    <input type="password" id="pinInput" maxlength="6" placeholder="••••••">
+    <br>
+    <button onclick="checkPin()">Unlock</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container" id="mainContent">
+    <div class="name">Angel 🤍</div>
+    <div class="message" id="text"></div>
+    <button id="chooseBtn" onclick="chooseYou()" style="display:none;">I Choose You</button>
+    <div class="final-message" id="finalText">
+        No matter how hard life gets…
+        I choose you.
+        Always. 💖
+    </div>
+</div>
+
+<script>
+const correctPin = "010905";
+
+function checkPin() {
+    const entered = document.getElementById("pinInput").value;
+    const lock = document.getElementById("lockScreen");
+
+    if (entered === correctPin) {
+        lock.style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        startTyping();
+    } else {
+        lock.classList.add("shake");
+        setTimeout(() => lock.classList.remove("shake"), 400);
+    }
+}
+
+const message = `Hey Angel…
+
+You are important to me in ways I don’t even know how to fully explain.
+
+You make life easier.
+You calm storms inside me.
+
+I’m scared sometimes.
+Scared I could hurt you with my struggles.
+But I am fighting through it.
+Because you matter.
+
+If I ever become too much, please tell me.
+I want to protect you, not lose you.
+
+And if you ever need someone —
+even at 1 in the morning —
+I will answer.
+
+Because I choose you.`;
+
+let i = 0;
+
+function startTyping() {
+    typeWriter();
+}
+
+function typeWriter() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 25);
+    } else {
+        document.getElementById("chooseBtn").style.display = "inline-block";
+    }
+}
+
+function chooseYou() {
+    document.getElementById("finalText").style.opacity = "1";
+}
+</script>
+
+</body>
+</html>
