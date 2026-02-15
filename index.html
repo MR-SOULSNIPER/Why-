@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -61,6 +61,7 @@ button {
     color: white;
     font-size: 16px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
@@ -110,7 +111,6 @@ button:hover {
 </head>
 <body>
 
-<!-- LOCK SCREEN -->
 <div class="lock-screen" id="lockScreen">
     <h2>Enter The PIN 🔒</h2>
     <p>This is just for you, Angel</p>
@@ -119,7 +119,6 @@ button:hover {
     <button onclick="checkPin()">Unlock</button>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="container" id="mainContent">
     <div class="name">Angel 🤍</div>
     <div class="message" id="text"></div>
@@ -134,21 +133,7 @@ button:hover {
 <script>
 const correctPin = "010905";
 
-function checkPin() {
-    const entered = document.getElementById("pinInput").value;
-    const lock = document.getElementById("lockScreen");
-
-    if (entered === correctPin) {
-        lock.style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-        startTyping();
-    } else {
-        lock.classList.add("shake");
-        setTimeout(() => lock.classList.remove("shake"), 400);
-    }
-}
-
-const message = const message = `Hey Angel…
+const message = `Hey Angel…
 
 There are so many things I want to say to you, and sometimes I struggle to find the right words. Not because I don’t feel enough — but because what I feel is bigger than simple sentences.
 
@@ -158,24 +143,16 @@ You make life easier.
 You calm storms inside me.
 You give me something steady to hold onto.
 
-And I want to be honest with you.
-
-Sometimes I get scared. Scared that I might not always say things the right way. Scared that my struggles might spill over. Scared that I might hurt you without meaning to. And that fear doesn’t come from weakness — it comes from caring too much.
+Sometimes I get scared. Scared that I might not always say things the right way. Scared that my struggles might spill over. And that fear doesn’t come from weakness — it comes from caring too much.
 
 Because you matter to me.
 
-You matter more than my pride.
-More than my ego.
-More than my fears.
-
-If I ever become too much, please tell me. I don’t want silence to grow between us. I don’t want distance where there should be understanding. I want to protect what we have, not slowly damage it by accident.
+If I ever become too much, please tell me. I don’t want distance where there should be understanding. I want to protect what we have, not lose it.
 
 I am not perfect.
 I overthink.
 I get quiet sometimes.
-I fight battles in my head that I don’t always talk about.
-
-But even in all of that… I choose you.
+But even with all that… I choose you.
 
 Not just when it’s easy.
 Not just when it’s romantic.
@@ -183,49 +160,17 @@ Not just when everything feels perfect.
 
 I choose you when life feels stressful.
 I choose you when misunderstandings happen.
-I choose you when I feel unsure.
 I choose you when I’m scared.
-I choose you when things aren’t simple.
-
-Because choosing someone isn’t about the perfect moments — it’s about staying when things are real.
 
 And if you ever need someone —
-Even at 1 in the morning…
-Even on your worst day…
-Even when you feel like you’re too much…
-Even when you think nobody understands…
-
+even at 1 in the morning —
 I will answer.
 
-I won’t always have perfect advice.
-I won’t always fix everything.
+I may not always have perfect advice.
 But I will be there.
 
-I want to build something strong with you. Something patient. Something safe. Something where we can both grow without fear.
-
-You deserve someone who reassures you.
-Someone who listens.
-Someone who stays.
-Someone who doesn’t give up when things feel heavy.
-
-And I am trying — every day — to be that person.
-
-If life gets hard…
-If distance feels long…
-If emotions feel overwhelming…
-If the world feels unfair…
-
-Remember this:
-
 I am not walking away.
-I am not choosing someone else.
 I am not giving up.
-
-I choose you.
-
-Today.
-Tomorrow.
-And every day I am allowed to stand beside you.
 
 No matter how hard life gets…
 I choose you.
@@ -233,8 +178,18 @@ Always. 💖`;
 
 let i = 0;
 
-function startTyping() {
-    typeWriter();
+function checkPin() {
+    const entered = document.getElementById("pinInput").value;
+    const lock = document.getElementById("lockScreen");
+
+    if (entered === correctPin) {
+        lock.style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        typeWriter();
+    } else {
+        lock.classList.add("shake");
+        setTimeout(() => lock.classList.remove("shake"), 400);
+    }
 }
 
 function typeWriter() {
